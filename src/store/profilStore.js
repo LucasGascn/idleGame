@@ -14,7 +14,7 @@ export const useProfilStore = defineStore('profil', {
         },
         async login(data){
             await login(data).then((res) => {
-                setAxiosToken(res.data);
+                setAxiosToken(res.data.access_token);
             })
         },
         async me(){
