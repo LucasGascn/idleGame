@@ -1,5 +1,9 @@
 <template>
     <h1>Inventory</h1>
+
+    <div class="profilMe">
+        {{profil}}
+    </div>
 </template>
 
 <script>
@@ -12,5 +16,11 @@ import { useResourceStore } from '../store/resourceStore';
             ...mapActions(useProfilStore,["me"]),
             ...mapActions(useResourceStore,["createResource","getInventory","getResources","getResourcesById"])
         },
+        computed: {
+            ...mapState(useProfilStore,['profil']) 
+        },
+        mounted(){
+            this.me();
+        }
     }
 </script>

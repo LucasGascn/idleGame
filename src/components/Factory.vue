@@ -6,7 +6,7 @@
     :key = "index"
     class="factory">
         {{factory}}
-        <button @click="upgradeFactory(index)">Upgrade pour : </button>
+        <button @click="upgradeFactory(index)">Upgrade</button>
         <button @click="deleteFactory(index)">Delete</button>
     </div>
 
@@ -15,7 +15,7 @@
             Sélectionner le type de factory
             <select name="" id="" v-model="factoryModel" v-for="(model, index) in factoryModelsList"
             :key = "index">
-                <option>{{model.name}}</option>
+                <option>{{model.resource.name}}</option>
             </select>
         </div> 
         <button type="submit">Créer Factory</button>
@@ -39,7 +39,6 @@ export default{
     methods: {
         ...mapActions(useFactoriesStore, ['createFactory','deleteFactory','getFactoryById','getAllFactoriesList','getFactoryLimit','upgradeFactory','buyFactorySlot','getAllFactoriesModels','deleteFactoryModel','createFactoriesModel']),
         onSubmit(){
-            this.factoryModel = data
             this.createFactory(this.factoryModel);
         }
     },

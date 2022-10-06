@@ -4,8 +4,6 @@ import { http, login, me, setAxiosToken, signUp } from "../functions/api";
 export const useProfilStore = defineStore('profil', {
     state: () => ({
         profil: {
-            username: "",
-            password: ""
         }
     }),
     actions: {
