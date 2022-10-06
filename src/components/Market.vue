@@ -2,12 +2,16 @@
 <template>
     <h1>MarketBoard</h1>
     <div v-for="(offer, index) in marketList"
-    :key = "index" >
-    {{offer}}
+    :key = "index" 
+    class="marketBoard">
+    <div>{{offer}}</div>
     <button @click="buyOffer(index)"></button>
     </div>
-    
-
+<!--     
+    <div v-for="(marketOffer,index) in marketList"
+    :key="index">
+        {{marketOffer}}
+    </div> -->
     <form @submit.prevent="onSubmit">
         <div class="seller">
             <input type="int" v-model="id" placeholder="id">
@@ -32,7 +36,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(useMarketStore,['createOffer',"buyOffer","deleteTrade","getAllTrades","getMyTrades","getTradeById"]),
+        ...mapActions(useMarketStore,['createOffer',"buyOffer","deleteTrade","getAllTrades","getTradeById","getMyTrades"]),
         onSubmit(){
             data ={
                 "resourceId": this.id,

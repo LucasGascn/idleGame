@@ -5,17 +5,35 @@
     <div v-for="(factory,index) in factoriesList"
     :key = "index"
     class="factory">
-        {{factory}}
-        <button @click="upgradeFactory(index)">Upgrade</button>
-        <button @click="deleteFactory(index)">Delete</button>
+        <div>{{factory.model.resource.name}}</div>
+        <div><img src={{factory.model.image_url}}></div>
+        <div>niveau : {{factory.level}}</div>
+        <div>prod : {{factory.model.generate_per_minute}} / min </div>
+        <div> cout upgrade : {{factory.next_upgrade_cost + " " + factory.model.upgrade_resource.name}}</div>
+        <button @click="upgradeFactory(factory.id)">Upgrade</button>
+        <button @click="deleteFactory(factoryList[index])">Delete</button>
     </div>
+
+    <div>
+        Maximum de Factory: {{this.factoryLimit.factory_limit }}
+        <button @click="buyFactorySlot">Augmenter la limite</button>
+    </div>
+
 
     <form @submit.prevent="onSubmit">
         <div class="facOptions">
             Sélectionner le type de factory
-            <select name="" id="" v-model="factoryModel" v-for="(model, index) in factoryModelsList"
-            :key = "index">
-                <option>{{model.resource.name}}</option>
+            <div v-for="(model, index) in factoryModelsList"
+                    :key = "index"
+                    >
+                    {{model.id + " " + model.resource.name}}
+            </div>
+            <select name="" id="" v-model.number="factoryModel" >
+                <option v-for="(model, index) in factoryModelsList"
+                    :key = "index"
+                    type="int"
+                    >{{model.id}}
+                </option>
             </select>
         </div> 
         <button type="submit">Créer Factory</button>
@@ -33,13 +51,18 @@ import { useFactoriesStore } from '../store/factoriesStore'
 export default{
     data() {
         return {
-            factoryModel: "",
+            factoryModel: null,
         }
     },
     methods: {
         ...mapActions(useFactoriesStore, ['createFactory','deleteFactory','getFactoryById','getAllFactoriesList','getFactoryLimit','upgradeFactory','buyFactorySlot','getAllFactoriesModels','deleteFactoryModel','createFactoriesModel']),
         onSubmit(){
-            this.createFactory(this.factoryModel);
+            let rec = {
+                "factory_model": this.factoryModel
+            }
+            console.log(rec)
+            this.createFactory(rec);
+            this.getAllFactoriesList();
         }
     },
     computed: {
@@ -48,6 +71,7 @@ export default{
     mounted () {
         this.getAllFactoriesList();
         this.getAllFactoriesModels();
+        this.getFactoryLimit();
     },
 }
 

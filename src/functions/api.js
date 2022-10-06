@@ -107,6 +107,9 @@ export function getAllTrades(){
 export function buyOffer(data){
     return http.post('/trades/buy', data)
 }
+export function getMyTrades(){
+    return http.get('/trades/my')
+}
 //------------------------
 
 

@@ -34,8 +34,8 @@ export const useFactoriesStore = defineStore('factories', {
                 this.factoriesList[id] = res.data;
             })
         },
-        async buyFactorySlot(data){
-            await buyFactorySlot(data).then((res) => {
+        async buyFactorySlot(){
+            await buyFactorySlot().then((res) => {
                 this.factorySlot = res.data;
             })
         },
