@@ -5,6 +5,9 @@ import ToolingIcon from './icons/IconTooling.vue'
 import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
+import { mapActions, mapState } from 'pinia'
+import { useProfilStore } from "../store/profilStore";
+
 </script>
 
 <template>
@@ -83,4 +86,35 @@ import SupportIcon from './icons/IconSupport.vue'
     us by
     <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
   </WelcomeItem>
+
+  <form @submit.prevent="login(setData())">
+    <input type="text" name="username" id="username" v-model="user.username">
+    <input type="text" name="password" id="password" v-model="user.password">
+    <button type="submit">ff</button>
+  </form>
 </template>
+
+<script>
+
+  export default {
+
+    data() {
+      return {
+        user: {username: '', password: ''}
+      }
+    },
+    methods: {
+      setData(){
+        let data = {'username': this.user.username, 'password': this.user.password}
+        this.user.username = ''
+        this.user.password = ''
+        return data
+      },
+      ...mapActions(useProfilStore, ['login']),
+    },
+    computed: {
+      ...mapState(useProfilStore, ['profil']),
+    }
+
+  }
+</script>
