@@ -1,15 +1,15 @@
 <script>
     import Home from '../components/Home.vue'
-    import TheWelcome from '../components/TheWelcome.vue';
+    import Login from '../components/Login.vue';
     export default{
         components:{
             Home,
-            TheWelcome
+            Login
         }
     }
 </script>
 
 <template>
     <Home/>
-    <TheWelcome/>
+    <Login/>
 </template>
