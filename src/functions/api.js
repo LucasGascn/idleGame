@@ -4,6 +4,10 @@ export const http = axios.create({
     baseURL: 'https://apigame.co',
 });
 
+export function setAxiosToken(token){
+    http.defaults.headers.common['Authorization'] = "Bearer " + token;
+}
+
 //-------factory-limit----
 export function buyFactorySlot(data){
     return http.post('/users/buy-factory-limit', data);
