@@ -4,11 +4,17 @@ export const http = axios.create({
     baseURL: 'https://apigame.co',
 });
 
-
-//------factories---------
+//-------factory-limit----
 export function buyFactorySlot(data){
     return http.post('/users/buy-factory-limit', data);
 }
+
+export function getFactoryLimit(){
+    return http.get('/users/factory-limit');
+}
+//------------------------
+
+//------factories---------
 
 export function createFactory(data){
     return http.post('/factories', data);
@@ -82,16 +88,20 @@ export function createOffer(data){
     return http.post('/trades', data);
 }
 
-export function getMyTrades(){
-    return http.get('/trades/my');
-}
-
 export function getTradeById(id){
     return http.get('/trades/' + id);
 }
 
 export function deleteTrade(id){
     return http.delete('/trades/' + id);
+}
+
+export function getAllTrades(){
+    return http.get('/trades/all');
+}
+
+export function buyOffer(data){
+    return http.post('/trades/buy', data)
 }
 //------------------------
 

@@ -1,10 +1,12 @@
 import { defineStore } from "pinia";
-import { buyFactorySlot, createFactory, deleteFactory, getAllFactories, getFactoryById, upgradeFactory } from "../functions/api";
+import { buyFactorySlot, createFactory, createFactoryModel, deleteFactory, getAllFactories, getFactoriesModels, getFactoryById, getFactoryLimit, upgradeFactory } from "../functions/api";
 
 export const useFactoriesStore = defineStore('factories', {
     state: () => ({
         factoriesList: {},
-        factorySlot: {}
+        factorySlot: {},
+        factoryLimit: {},
+        factoryModelsList: {}
     }),
     actions:  {
         async createFactory(data){
@@ -24,7 +26,7 @@ export const useFactoriesStore = defineStore('factories', {
         },
         async deleteFactory(id){
             await deleteFactory(id).then((res) => {
-
+                this.factoriesList.splice(id, 1);
             })
         },
         async upgradeFactory(id, data){
@@ -35,6 +37,26 @@ export const useFactoriesStore = defineStore('factories', {
         async buyFactorySlot(data){
             await buyFactorySlot(data).then((res) => {
                 this.factorySlot = res.data;
+            })
+        },
+        async getFactoryLimit(){
+            await getFactoryLimit().then((res) => {
+                this.factoryLimit = res.data;
+            })
+        },
+        async getAllFactoriesModels(){
+            await getFactoriesModels().then((res) => {
+                this.factoryModelsList = res.data;
+            })
+        },
+        async createFactoriesModel(model){
+            await createFactoryModel(model).then((res) => {
+                this.factoryModelsList.push(res.data);
+            })
+        },
+        async deleteFactoryModel(id){
+            await deleteFactoryModel(id).then((res)=>{
+                this.factoryModelsList.splice(id, 1);
             })
         }
     } 

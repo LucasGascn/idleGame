@@ -24,12 +24,5 @@ export const useProfilStore = defineStore('profil', {
                 this.profil = res.data;
             })
         }
-    },
-    methods: {
-/*         setHeaders(token) {
-            console.log(token)
-            http.defaults.headers.common['Authorization'] = token
-        } */
     }
-
 })
