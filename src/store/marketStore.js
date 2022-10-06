@@ -24,7 +24,7 @@ export const useMarketStore = defineStore('market', {
         },
         async deleteTrade(id){
             await deleteTrade(id).then((res) => {
-                this.marketList[id] = res.data;
+                this.marketList.splice(id, 1);
             })
         },
         async getAllTrades(){
