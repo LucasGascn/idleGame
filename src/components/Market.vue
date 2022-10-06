@@ -14,9 +14,9 @@
     </div> -->
     <form @submit.prevent="onSubmit">
         <div class="seller">
-            <input type="int" v-model="id" placeholder="id">
-            <input type="int" v-model="quantity" placeholder="quantité">
-            <input type="int" v-model="price" placeholder="prix">
+            <input type="int" v-model.number="id" placeholder="id">
+            <input type="int" v-model.number="quantity" placeholder="quantité">
+            <input type="int" v-model.number="price" placeholder="prix">
         </div>
         <button type="submit">Créer une offre</button>
     </form>
@@ -38,11 +38,12 @@ export default {
     methods: {
         ...mapActions(useMarketStore,['createOffer',"buyOffer","deleteTrade","getAllTrades","getTradeById","getMyTrades"]),
         onSubmit(){
-            data ={
+            let data ={
                 "resourceId": this.id,
-                "quantity" : this.quantity,
+                "quantity": this.quantity,
                 "price": this.price
             }
+            console.log(data);
             this.createOffer(data);
         }
     },
@@ -50,7 +51,7 @@ export default {
         ...mapState(useMarketStore,['marketList','myOffers']) 
     },
     mounted () {
-        this.getAllTrades;
+        this.getAllTrades();
     },
 }
 </script>

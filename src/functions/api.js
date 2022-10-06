@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const http = axios.create({
-    baseURL: 'https://apigame.co',
+   /*  baseURL: 'https://apigame.co', */
+   baseURL: 'https://apigame.co',
 });
 
 export function setAxiosToken(token){

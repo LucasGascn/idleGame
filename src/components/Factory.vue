@@ -1,5 +1,5 @@
 
-<template>
+<template>    
     <h1>Factories</h1>
 
     <div v-for="(factory,index) in factoriesList"
@@ -43,36 +43,37 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'pinia'
-import { useFactoriesStore } from '../store/factoriesStore'
-
-
-
-export default{
-    data() {
-        return {
+    import { mapActions, mapState } from 'pinia'
+    import { useFactoriesStore } from '../store/factoriesStore'
+    
+    
+    
+    export default{
+        data() {
+            return {
             factoryModel: null,
-        }
-    },
-    methods: {
-        ...mapActions(useFactoriesStore, ['createFactory','deleteFactory','getFactoryById','getAllFactoriesList','getFactoryLimit','upgradeFactory','buyFactorySlot','getAllFactoriesModels','deleteFactoryModel','createFactoriesModel']),
-        onSubmit(){
+            }
+        },
+        methods: {
+            ...mapActions(useFactoriesStore, ['createFactory','deleteFactory','getFactoryById','getAllFactoriesList','getFactoryLimit','upgradeFactory','buyFactorySlot','getAllFactoriesModels','deleteFactoryModel','createFactoriesModel']),
+            onSubmit(){
             let rec = {
                 "factory_model": this.factoryModel
             }
             console.log(rec)
             this.createFactory(rec);
             this.getAllFactoriesList();
-        }
-    },
-    computed: {
-        ...mapState(useFactoriesStore, ['factoriesList','factoryLimit','factorySlot','factoryModelsList']) 
-    },
-    mounted () {
-        this.getAllFactoriesList();
-        this.getAllFactoriesModels();
+            }
+        },
+        computed: {
+            ...mapState(useFactoriesStore, ['factoriesList','factoryLimit','factorySlot','factoryModelsList']) 
+        },
+        mounted () {
+            this.getAllFactoriesList();
+            this.getAllFactoriesModels();
         this.getFactoryLimit();
-    },
-}
-
-</script>
+        },
+    }
+    
+    </script>
+    
