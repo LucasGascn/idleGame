@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
-import { buyFactorySlot, createFactory, deleteFactory, getAllFactories, getFactoryById, upgradeFactory } from "../functions/api";
+import { buyFactorySlot, createFactory, deleteFactory, getAllFactories, getFactoryById, getFactoryLimit, upgradeFactory } from "../functions/api";
 
 export const useFactoriesStore = defineStore('factories', {
     state: () => ({
         factoriesList: {},
-        factorySlot: {}
+        factorySlot: {},
+        factoryLimit: {}
     }),
     actions:  {
         async createFactory(data){
@@ -24,7 +25,7 @@ export const useFactoriesStore = defineStore('factories', {
         },
         async deleteFactory(id){
             await deleteFactory(id).then((res) => {
-
+                this.factoriesList.splice(id, 1);
             })
         },
         async upgradeFactory(id, data){
@@ -35,6 +36,11 @@ export const useFactoriesStore = defineStore('factories', {
         async buyFactorySlot(data){
             await buyFactorySlot(data).then((res) => {
                 this.factorySlot = res.data;
+            })
+        },
+        async getFactoryLimit(){
+            await getFactoryLimit().then((res) => {
+                this.factoryLimit = res.data;
             })
         }
     } 
