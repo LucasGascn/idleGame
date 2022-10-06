@@ -4,7 +4,8 @@ import Factory from '../components/Factory.vue';
 export default({
     components:{
         Factory
-    }
+    },
+
 })
 </script>
 
