@@ -2,19 +2,21 @@
 <template>
     <h1>MarketBoard</h1>
     <div class="marketBoard">
-    <div v-for="(offer, index) in marketList"
-    :key = "index"
-    class="containerOffer" >
+        <MarketOffers/>
+
+<!--         <div v-for="(offer, index) in marketList"
+        :key = "index"
+        class="containerOffer" >
             <div>
                 <div>
                     <div>Vendeur : {{offer.owner.username}}</div>
                     <div> Vends :{{offer.quantity + offer.resource.name}}</div>
                     <div>Pour : {{offer.unitPrice}} </div>
-                    <!-- <div>{{offer}}</div> -->
+                    <div>{{offer}}</div>
                     <button @click="buyOffer(index)">acheter</button>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 
@@ -38,8 +40,12 @@
 import { mapActions, mapState } from 'pinia';
 import { useMarketStore } from '../store/marketStore';
 import { useResourceStore } from '../store/resourceStore';
+import MarketOffers from './MarketOffers.vue';
 
 export default {
+    components: {
+    MarketOffers
+},
     data() {
         return {
             id:"",
