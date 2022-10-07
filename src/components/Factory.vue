@@ -28,6 +28,7 @@
             Sélectionner le type de factory
             <div v-for="(model, index) in factoryModelsList"
                     :key = "index"
+                    class="facListing"
                     >
                     {{model.id + " " + model.resource.name}}
             </div>
@@ -46,20 +47,20 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'pinia'
-import { useFactoriesStore } from '../store/factoriesStore'
-
-
-
-export default{
-    data() {
-        return {
+    import { mapActions, mapState } from 'pinia'
+    import { useFactoriesStore } from '../store/factoriesStore'
+    
+    
+    
+    export default{
+        data() {
+            return {
             factoryModel: null,
-        }
-    },
-    methods: {
-        ...mapActions(useFactoriesStore, ['createFactory','deleteFactory','getFactoryById','getAllFactoriesList','getFactoryLimit','upgradeFactory','buyFactorySlot','getAllFactoriesModels','deleteFactoryModel','createFactoriesModel']),
-        onSubmit(){
+            }
+        },
+        methods: {
+            ...mapActions(useFactoriesStore, ['createFactory','deleteFactory','getFactoryById','getAllFactoriesList','getFactoryLimit','upgradeFactory','buyFactorySlot','getAllFactoriesModels','deleteFactoryModel','createFactoriesModel']),
+            onSubmit(){
             let rec = {
                 "factory_model": this.factoryModel
             }
@@ -83,7 +84,24 @@ export default{
         this.getAllFactoriesList();
         this.getAllFactoriesModels();
         this.getFactoryLimit();
-    },
-}
-
-</script>
+        },
+    }
+    
+    </script>
+    
+    <style>
+        .factory{
+            display: flex;
+            flex-direction: column;
+            background: burlywood;
+        }
+        .facOptions{
+        }
+        .facListing{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .facListing div{
+            width: 30%;
+        }
+    </style>
