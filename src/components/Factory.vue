@@ -11,8 +11,7 @@
             <div><img src={{factory.model.image_url}}></div>
             <div>niveau : {{factory.level}}</div>
             <div>prod : {{factory.model.generate_per_minute*factory.level}} / min </div>
-            <div> cout upgrade : {{factory.next_upgrade_cost + " " + factory.model.upgrade_resource.name}}</div>
-            <button @click="factoryUpgrade(factory.id)">Upgrade pour {{ factory.level ** factory.model.upgrade_coef}}</button>
+            <button @click="factoryUpgrade(factory.id)">Upgrade pour {{ factory.level ** factory.model.upgrade_coef}} {{factory.model.resource.name}}</button>
             <!-- <div>{{factory.id}}</div> -->
             <button @click="deleteFactory(factory.id)">Delete</button>
         </div>
@@ -70,9 +69,10 @@
             this.getAllFactoriesList();
         },
         factoryUpgrade(id){
-            this.getAllFactoriesModels()
             this.upgradeFactory(id);
-            // this.factoriesList = this.getAllFactoriesList();
+            this.getAllFactoriesModels();
+            this.getAllFactoriesList();
+
         },
         buyNewFactorySlot(){
             this.buyFactorySlot();
@@ -80,7 +80,8 @@
         }
     },
     computed: {
-        ...mapState(useFactoriesStore, ['factoriesList','factoryLimit','factorySlot','factoryModelsList']) 
+        ...mapState(useFactoriesStore, ['factoriesList','factoryLimit','factorySlot','factoryModelsList']),
+
     },
     mounted () {
         this.getAllFactoriesList();

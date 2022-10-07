@@ -4,19 +4,19 @@
     <div class="marketBoard">
         <MarketOffers/>
 
-<!--         <div v-for="(offer, index) in marketList"
+<!--          <div v-for="(offer, index) in marketList"
         :key = "index"
         class="containerOffer" >
             <div>
                 <div>
                     <div>Vendeur : {{offer.owner.username}}</div>
-                    <div> Vends :{{offer.quantity + offer.resource.name}}</div>
+                    <div> Vends :{{offer.quantity + " " + offer.resource.name}}</div>
                     <div>Pour : {{offer.unitPrice}} </div>
-                    <div>{{offer}}</div>
-                    <button @click="buyOffer(index)">acheter</button>
+                    <div>{{offer}}</div> 
+                    <button @click="buy(offer.id, offer.quantity)">acheter</button>
                 </div>
             </div>
-        </div> -->
+        </div>  -->
     </div>
 
 
@@ -69,6 +69,14 @@ export default {
             }
             console.log(data);
             this.createOffer(data);
+        },
+        buy(id, quantity){
+            let data ={
+                "id":id,
+                "quantity":quantity,
+            }
+            this.buyOffer(data);
+            this.getAllTrades();
         }
     },
     computed: {
