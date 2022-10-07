@@ -1,7 +1,9 @@
 
 <template>
+    
     <h1>Factories</h1>
 
+    
     <div v-for="(factory,index) in factoriesList"
     :key = "index"
     class="factory">
@@ -10,13 +12,14 @@
         <div>niveau : {{factory.level}}</div>
         <div>prod : {{factory.model.generate_per_minute}} / min </div>
         <div> cout upgrade : {{factory.next_upgrade_cost + " " + factory.model.upgrade_resource.name}}</div>
-        <button @click="upgradeFactory(factory.id)">Upgrade</button>
-        <button @click="deleteFactory(factoryList[index])">Delete</button>
+        <button @click="factoryUpgrade(factory.id)">Upgrade</button>
+        <div>{{factory.id}}</div>
+        <button @click="deleteFactory(factory.id)">Delete</button>
     </div>
 
     <div>
         Maximum de Factory: {{this.factoryLimit.factory_limit }}
-        <button @click="buyFactorySlot">Augmenter la limite</button>
+        <button @click="buyNewFactorySlot">Augmenter la limite</button>
     </div>
 
 
@@ -63,6 +66,14 @@ export default{
             console.log(rec)
             this.createFactory(rec);
             this.getAllFactoriesList();
+        },
+        factoryUpgrade(id){
+            this.upgradeFactory(id);
+            this.getAllFactoriesList();
+        },
+        buyNewFactorySlot(){
+            this.buyFactorySlot();
+            this.factoryLimit = this.getFactoryLimit();
         }
     },
     computed: {

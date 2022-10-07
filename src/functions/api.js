@@ -36,8 +36,8 @@ export function deleteFactory(id){
     return http.delete('/factories/' + id);
 }
 
-export function upgradeFactory(id, data){
-    return http.post('/factories/' + id + '/levelup', data);
+export function upgradeFactory(id){
+    return http.post('/factories/' + id + '/levelup');
 }
 //------------------------
 

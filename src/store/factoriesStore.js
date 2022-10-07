@@ -29,8 +29,8 @@ export const useFactoriesStore = defineStore('factories', {
                 this.factoriesList.splice(id, 1);
             })
         },
-        async upgradeFactory(id, data){
-            await upgradeFactory(id, data).then((res) => {
+        async upgradeFactory(id){
+            await upgradeFactory(id).then((res) => {
                 this.factoriesList[id] = res.data;
             })
         },

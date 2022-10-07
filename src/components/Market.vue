@@ -5,13 +5,9 @@
     :key = "index" 
     class="marketBoard">
     <div>{{offer}}</div>
-    <button @click="buyOffer(index)"></button>
+    <button @click="buyOffer(index)">acheter</button>
     </div>
-<!--     
-    <div v-for="(marketOffer,index) in marketList"
-    :key="index">
-        {{marketOffer}}
-    </div> -->
+
     <form @submit.prevent="onSubmit">
         <div class="seller">
             <input type="int" v-model="id" placeholder="id">
@@ -26,6 +22,7 @@
 <script>
 import { mapActions, mapState } from 'pinia';
 import { useMarketStore } from '../store/marketStore';
+import { useResourceStore } from '../store/resourceStore';
 
 export default {
     data() {
@@ -37,20 +34,22 @@ export default {
     },
     methods: {
         ...mapActions(useMarketStore,['createOffer',"buyOffer","deleteTrade","getAllTrades","getTradeById","getMyTrades"]),
+        ...mapActions(useResourceStore,["getResources","getResourcesById"]),
         onSubmit(){
-            data ={
+            let data = {
                 "resourceId": this.id,
                 "quantity" : this.quantity,
-                "price": this.price
+                "unitPrice": this.price
             }
             this.createOffer(data);
         }
     },
     computed: {
-        ...mapState(useMarketStore,['marketList','myOffers']) 
+        ...mapState(useMarketStore,['marketList','myOffers']),
+        ...mapState(useResourceStore,['resourceList'])
     },
     mounted () {
-        this.getAllTrades;
+        this.getAllTrades();
     },
 }
 </script>
