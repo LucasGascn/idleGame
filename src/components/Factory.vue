@@ -3,18 +3,19 @@
     
     <h1>Factories</h1>
 
-    
-    <div v-for="(factory,index) in factoriesList"
-    :key = "index"
-    class="factory">
-        <div>{{factory.model.resource.name}}</div>
-        <div><img src={{factory.model.image_url}}></div>
-        <div>niveau : {{factory.level}}</div>
-        <div>prod : {{factory.model.generate_per_minute}} / min </div>
-        <div> cout upgrade : {{factory.next_upgrade_cost + " " + factory.model.upgrade_resource.name}}</div>
-        <button @click="factoryUpgrade(factory.id)">Upgrade</button>
-        <div>{{factory.id}}</div>
-        <button @click="deleteFactory(factory.id)">Delete</button>
+    <div class="factoryContainer">
+        <div v-for="(factory,index) in factoriesList"
+        :key = "index"
+        class="factory">
+            <div>{{factory.model.resource.name}}</div>
+            <div><img src={{factory.model.image_url}}></div>
+            <div>niveau : {{factory.level}}</div>
+            <div>prod : {{factory.model.generate_per_minute}} / min </div>
+            <div> cout upgrade : {{factory.next_upgrade_cost + " " + factory.model.upgrade_resource.name}}</div>
+            <button @click="factoryUpgrade(factory.id)">Upgrade</button>
+            <div>{{factory.id}}</div>
+            <button @click="deleteFactory(factory.id)">Delete</button>
+        </div>
     </div>
 
     <div>
@@ -90,10 +91,16 @@
     </script>
     
     <style>
+        .factoryContainer{
+            display: flex;
+            flex-direction: row;
+        }
         .factory{
             display: flex;
             flex-direction: column;
             background: burlywood;
+            width:30%;
+            margin: 1%;
         }
         .facOptions{
         }
