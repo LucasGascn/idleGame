@@ -10,10 +10,10 @@
             <div>{{factory.model.resource.name}}</div>
             <div><img src={{factory.model.image_url}}></div>
             <div>niveau : {{factory.level}}</div>
-            <div>prod : {{factory.model.generate_per_minute}} / min </div>
+            <div>prod : {{factory.model.generate_per_minute*factory.level}} / min </div>
             <div> cout upgrade : {{factory.next_upgrade_cost + " " + factory.model.upgrade_resource.name}}</div>
-            <button @click="factoryUpgrade(factory.id)">Upgrade</button>
-            <div>{{factory.id}}</div>
+            <button @click="factoryUpgrade(factory.id)">Upgrade pour {{ factory.level ** factory.model.upgrade_coef}}</button>
+            <!-- <div>{{factory.id}}</div> -->
             <button @click="deleteFactory(factory.id)">Delete</button>
         </div>
     </div>
@@ -41,7 +41,7 @@
                 </option>
             </select>
         </div> 
-        <button type="submit">Créer Factory</button>
+        <button type="submit">Créer Factory pour {{Math.pow(8, this.factoriesList.length + 1)}}</button>
     </form>
 
 
@@ -70,8 +70,9 @@
             this.getAllFactoriesList();
         },
         factoryUpgrade(id){
+            this.getAllFactoriesModels()
             this.upgradeFactory(id);
-            this.getAllFactoriesList();
+            // this.factoriesList = this.getAllFactoriesList();
         },
         buyNewFactorySlot(){
             this.buyFactorySlot();
@@ -101,8 +102,6 @@
             background: burlywood;
             width:30%;
             margin: 1%;
-        }
-        .facOptions{
         }
         .facListing{
             display: flex;

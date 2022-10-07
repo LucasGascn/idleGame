@@ -1,11 +1,8 @@
-<script >
-export default{
 
-}
-</script>
 <template>
 
 <div class="containerNav">
+    <!-- <div> argent : {{this.inventory.money}}</div> -->
     <nav>
         <RouterLink class="Link" to="/">Home</RouterLink>
         <RouterLink class="Link" to="/factory">Factory</RouterLink>
@@ -16,6 +13,31 @@ export default{
 
 
 </template>
+
+<script>
+    import { mapActions,mapState } from 'pinia';
+    import { useResourceStore } from '../store/resourceStore'
+
+    export default {
+        methods: {
+        ...mapActions(useResourceStore,["getResources","createResources","getInventory","getResourcesById"]),
+        // updateTimer(){
+        //     setInterval(() => {
+        //         getInventory()
+        //     }, 10)
+        // }
+    },
+    computed:{
+        ...mapState(useResourceStore,["inventory","resourceList"]),
+    },
+    mounted(){
+        // this.inventory.money = setInterval(()=>{
+        //     this.getInventory();
+        // },1000)
+    }
+    }
+
+</script>
 
 <style>
     .containerNav{

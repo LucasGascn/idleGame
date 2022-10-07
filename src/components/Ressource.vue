@@ -34,7 +34,6 @@
 
 <script>
     import { mapActions,mapState } from 'pinia';
-import { createResource } from '../functions/api';
     import { useResourceStore } from '../store/resourceStore'
 
     export default {
@@ -54,7 +53,7 @@ import { createResource } from '../functions/api';
                     "image_url": this.img,
                     "base_value": this.baseVal
                 }
-                createResource(data)
+                this.createResource(data)
                 this.getResources()
             }
         },

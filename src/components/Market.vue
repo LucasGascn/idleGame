@@ -1,31 +1,22 @@
 
 <template>
     <h1>MarketBoard</h1>
-    <div v-for="(offer, index) in marketList"
-    :key = "index" 
-    class="marketBoard">
-    <div>{{offer}}</div>
-    <button @click="buyOffer(index)">acheter</button>
-    </div>
-
     <div class="marketBoard">
-        <div class="containerOffer">
-            <form action="">
-
+    <div v-for="(offer, index) in marketList"
+    :key = "index"
+    class="containerOffer" >
+            <div>
                 <div>
-                    <h3>NOM DE L'OFFRE</h3>
+                    <div>Vendeur : {{offer.owner.username}}</div>
+                    <div> Vends :{{offer.quantity + offer.resource.name}}</div>
+                    <div>Pour : {{offer.unitPrice}} </div>
+                    <!-- <div>{{offer}}</div> -->
+                    <button @click="buyOffer(index)">acheter</button>
                 </div>
-
-                <div>
-                    <p>QUANTITE</p>
-                    <p>PRIX</p>
-                    <p>SELLER</p>
-                </div>
-            </form>
-
-            <button>BUY</button>
+            </div>
         </div>
     </div>
+
 
 <!--     
     <div v-for="(marketOffer,index) in marketList"
@@ -92,15 +83,15 @@ h1{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
+
 }
 .containerOffer{
     width: 22%;
     display: flex;
     flex-direction: column;
     text-align: center;
-    background: lightgray;
+    background: lightgray;margin:5px
 }
 .seller{
     display: flex;
