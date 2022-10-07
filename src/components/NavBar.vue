@@ -8,6 +8,8 @@
         <RouterLink class="Link" to="/factory">Factory</RouterLink>
         <RouterLink class="Link" to="/market">Market</RouterLink>
         <RouterLink class="Link" to="/ressource">Ressource</RouterLink>
+        <div class="coinsDiv" > Coins : {{this.inventory.money}}</div>
+
     </nav>
 </div>
 
@@ -45,7 +47,7 @@
     width: 100vw;
     display: flex;
     justify-content: center;
-    padding: 3vw 0;
+    padding: 1vw 0;
 
     }
     nav{
@@ -54,11 +56,18 @@
         justify-content: space-around;
         display: flex;
         width: 100%;
+        font-size: large;
     }
-    .Link{
+    .Link,.coinsDiv{
         color:white;
         margin: 0 1vw;
         text-decoration: none;
+    }
+
+    .coinsDiv{
+    background-color: #121619;
+    border-radius: 15px;
+    padding: 20px;
     }
 
 </style>

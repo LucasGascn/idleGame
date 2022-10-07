@@ -12,7 +12,7 @@
             <div class="divImg"><img :src=factory.model.resource.image_url></div>
             <div class="factoryContent">
                 <div>niveau : {{factory.level}}</div>
-                <div>prod : {{factory.model.generate_per_minute}} / min </div>
+                <div>prod : {{factory.model.generate_per_minute*factory.level}} / min </div>
                 <button @click="factoryUpgrade(factory.id)">Upgrade pour {{ factory.level ** factory.model.upgrade_coef}}</button>
                 <button @click="deleteFactory(factory.id)">Delete</button>
             </div>
@@ -53,11 +53,11 @@
                     </option>
                 </select>
             </div> 
-            <button type="submit">Créer Factory</button>
+            <button type="submit">Créer Factory pour {{Math.pow(8, this.factoriesList.length + 1)}}</button>
         </form>
     </div>
 
-    <form @submit.prevent="onSubmit">
+    <!-- <form @submit.prevent="onSubmit">
         <div class="facOptions">
             Sélectionner le type de factory
             <div v-for="(model, index) in factoryModelsList"
@@ -76,7 +76,7 @@
         </div> 
         <button type="submit">Créer Factory pour {{Math.pow(8, this.factoriesList.length + 1)}}</button>
     </form>
-
+ -->
 
 </template>
 
@@ -148,7 +148,7 @@
     justify-content: center;
     flex-wrap: wrap;
     }
-    .factoryPage button, .factoryPageBot button{
+    .factoryPage button, .factoryPageBot button, .marketBoard button{
         height: 30px;
     }
 
