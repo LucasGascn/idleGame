@@ -3,26 +3,55 @@
     
     <h1>Factories</h1>
 
-    <div class="factoryContainer">
+    <div class="factoryPage">
+
         <div v-for="(factory,index) in factoriesList"
         :key = "index"
         class="factory">
-            <div>{{factory.model.resource.name}}</div>
-            <div><img src={{factory.model.image_url}}></div>
-            <div>niveau : {{factory.level}}</div>
-            <div>prod : {{factory.model.generate_per_minute*factory.level}} / min </div>
-            <div> cout upgrade : {{factory.next_upgrade_cost + " " + factory.model.upgrade_resource.name}}</div>
-            <button @click="factoryUpgrade(factory.id)">Upgrade pour {{ factory.level ** factory.model.upgrade_coef}}</button>
-            <!-- <div>{{factory.id}}</div> -->
-            <button @click="deleteFactory(factory.id)">Delete</button>
+            <h3>{{factory.model.resource.name}}</h3>
+            <div class="divImg"><img :src=factory.model.resource.image_url></div>
+            <div class="factoryContent">
+                <div>niveau : {{factory.level}}</div>
+                <div>prod : {{factory.model.generate_per_minute}} / min </div>
+                <div>Factory id : {{factory.id}}</div>
+                <div> Upgrade cost : {{factory.next_upgrade_cost + " " + factory.model.upgrade_resource.name}}</div>
+                <button @click="factoryUpgrade(factory.id)">Upgrade pour {{ factory.level ** factory.model.upgrade_coef}}</button>
+                <button @click="deleteFactory(factory.id)">Delete</button>
+            </div>
         </div>
     </div>
 
-    <div>
-        Maximum de Factory: {{this.factoryLimit.factory_limit }}
-        <button @click="buyNewFactorySlot">Augmenter la limite</button>
-    </div>
+    <div class="factoryPageBot">
+        <div class="maxFactDiv">
+            <h4>
+                Maximum de Factory : {{this.factoryLimit.factory_limit }}
+            </h4>
+            <button @click="buyNewFactorySlot">Augmenter la limite</button>
+        </div>
 
+
+        <form @submit.prevent="onSubmit">
+            <div class="facOptions">
+                <h4>
+                    Sélectionner le type de factory
+                </h4>
+                <div v-for="(model, index) in factoryModelsList"
+                        :key = "index"
+                        class="facListing"
+                        >
+                        {{model.id + " " + model.resource.name}}
+                </div>
+                <select name="" id="" v-model.number="factoryModel" >
+                    <option v-for="(model, index) in factoryModelsList"
+                        :key = "index"
+                        type="int"
+                        >{{model.id}}
+                    </option>
+                </select>
+            </div> 
+            <button type="submit">Créer Factory</button>
+        </form>
+    </div>
 
     <form @submit.prevent="onSubmit">
         <div class="facOptions">
@@ -92,16 +121,63 @@
     </script>
     
     <style>
-        .factoryContainer{
+
+        .factoryPageBot{
             display: flex;
-            flex-direction: row;
+            margin-top: 60px;
         }
-        .factory{
+
+    .maxFactDiv, .factoryPageBot form{
+        border: solid #748695 ;
+        padding: 0 20px 20px 20px;
+        margin: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+    }
+
+    .factoryPage{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    }
+    .factoryPage button, .factoryPageBot button{
+        height: 30px;
+    }
+
+        .divImg{
+            padding: 0 30px;
+            display: flex;
+
+        }
+
+        .divImg img{
+            max-width: 200px;
+            align-self: center;
+        }
+
+        .factoryContent{
             display: flex;
             flex-direction: column;
-            background: burlywood;
-            width:30%;
-            margin: 1%;
+            justify-content: center;
+
+        }
+
+        .factory{
+            display: flex;
+            background: #748695;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px;
+            width: 40%;
+            justify-content: center;
+        }
+
+        .factory h3{
+            align-self: flex-start;
+        }
+        .facOptions{
         }
         .facListing{
             display: flex;

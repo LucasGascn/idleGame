@@ -1,9 +1,5 @@
 <template>
-    <h1>Inventory</h1>
-
-    <div class="profilMe">
-        {{profil}}
-    </div>
+    <h1>Home</h1>
 </template>
 
 <script>
