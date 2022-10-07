@@ -1,10 +1,6 @@
 <script >
 export default{
-    data(){
-        return{
-        coin:50
-        }
-    }
+
 }
 </script>
 <template>
@@ -19,16 +15,28 @@ export default{
 </div>
 
 
-<p>coin : {{this.coin}}</p>
 </template>
 
 <style>
-    .Link{
-        padding-right: 30px;
-    }
     .containerNav{
-        display: flex;
-        align-content: center;
-        justify-content: center;
+    background-color: #1f272e;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    padding: 3vw 0;
+
     }
+    nav{
+        text-align: center;
+        align-items: center;
+        justify-content: space-around;
+        display: flex;
+        width: 100%;
+    }
+    .Link{
+        color:white;
+        margin: 0 1vw;
+        text-decoration: none;
+    }
+
 </style>

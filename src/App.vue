@@ -13,7 +13,8 @@ export default{
 </script>
 
 <template>
-  
+  <body>
+    
   <header>
     
     <div>
@@ -24,8 +25,13 @@ export default{
   </header>
 
   <RouterView />
+</body>
+
 </template>
 
 <style >
-
+body{
+  background-color: #232d37;
+  margin: 0;
+}
 </style>
