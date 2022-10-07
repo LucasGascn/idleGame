@@ -2,7 +2,7 @@
     <h1>Inventaire</h1> 
 
     <div>
-        <div> argent : {{inventory.money}}</div>
+        <div>Argent : {{inventory.money}}</div>
         <div v-for="(ressource,index) in inventory.inventory_resources"
         :key="index">
             {{ressource.resource.name + " : " + ressource.quantity}} 
@@ -67,3 +67,7 @@
         },
     }
 </script>
+
+<style>
+    
+</style>
