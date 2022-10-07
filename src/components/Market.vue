@@ -8,10 +8,10 @@
             <div>
                 <div>
                     <div>Vendeur : {{offer.owner.username}}</div>
-                    <div> Vends :{{offer.quantity + offer.resource.name}}</div>
+                    <div> Vends :{{offer.quantity + " " + offer.resource.name}}</div>
                     <div>Pour : {{offer.unitPrice}} </div>
                     <!-- <div>{{offer}}</div> -->
-                    <button @click="buyOffer(index)">acheter</button>
+                    <button @click="buy(offer.id, offer.quantity)">acheter</button>
                 </div>
             </div>
         </div>
@@ -63,6 +63,14 @@ export default {
             }
             console.log(data);
             this.createOffer(data);
+        },
+        buy(id, quantity){
+            let data ={
+                "id":id,
+                "quantity":quantity,
+            }
+            this.buyOffer(data);
+            this.getAllTrades();
         }
     },
     computed: {
