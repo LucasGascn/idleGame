@@ -32,9 +32,8 @@ export const useMarketStore = defineStore('market', {
                 this.marketList = res.data;
             })
         },
-        async buyOffer(id){
-            await buyOffer(id).then((res) => {
-
+        async buyOffer(data){
+            await buyOffer(data).then((res) => {
             })
         }
     }

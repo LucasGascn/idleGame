@@ -2,9 +2,10 @@
     <h1>Inventaire</h1> 
 
     <div>
-        <div> argent : {{this.inventory.money}}</div>
-        <div v-for="ressource in this.inventory.inventory_resources">
-            id : {{ressource.id + " quantité : " + ressource.quantity}} 
+        <div> argent : {{inventory.money}}</div>
+        <div v-for="(ressource,index) in inventory.inventory_resources"
+        :key="index">
+            {{ressource.resource.name + " : " + ressource.quantity}} 
         </div>
         <!-- <div v-for="(item,index) in this.inventory.owner"
         :key="index">
@@ -17,10 +18,10 @@
         </div> -->
     </div>
 
-    <div v-for="(resource,index) in resourceList"
+    <!-- <div v-for="(resource,index) in resourceList"
     :key="index">
-        <div>{{resource.name + " : " + resource.quantity}}</div>
-    </div>
+        <div>{{resource.name + " : " }}</div>
+    </div> -->
 
     <div>
         <form @submit.prevent = "onSubmit">
