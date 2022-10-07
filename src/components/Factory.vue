@@ -25,6 +25,7 @@
             Sélectionner le type de factory
             <div v-for="(model, index) in factoryModelsList"
                     :key = "index"
+                    class="facListing"
                     >
                     {{model.id + " " + model.resource.name}}
             </div>
@@ -77,3 +78,19 @@
     
     </script>
     
+    <style>
+        .factory{
+            display: flex;
+            flex-direction: column;
+            background: burlywood;
+        }
+        .facOptions{
+        }
+        .facListing{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .facListing div{
+            width: 30%;
+        }
+    </style>
