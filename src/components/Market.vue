@@ -2,19 +2,21 @@
 <template>
     <h1>MarketBoard</h1>
     <div class="marketBoard">
-    <div v-for="(offer, index) in marketList"
-    :key = "index"
-    class="containerOffer" >
+        <MarketOffers/>
+
+<!--          <div v-for="(offer, index) in marketList"
+        :key = "index"
+        class="containerOffer" >
             <div>
                 <div>
                     <div>Vendeur : {{offer.owner.username}}</div>
-                    <div> Vends :{{offer.quantity + " " + offer.resource.name}}</div>
+                    <div> Vends : {{offer.quantity + " " + offer.resource.name}}</div>
                     <div>Pour : {{offer.unitPrice}} </div>
-                    <!-- <div>{{offer}}</div> -->
+                    <div>{{offer}}</div> 
                     <button @click="buy(offer.id, offer.quantity)">acheter</button>
                 </div>
             </div>
-        </div>
+        </div>  -->
     </div>
 
 
@@ -23,7 +25,10 @@
     :key="index">
         {{marketOffer}}
     </div> -->
-    <form @submit.prevent="onSubmit">
+    <form class="marketForm" @submit.prevent="onSubmit">
+        <h3>
+            Créer une offre
+        </h3>
         <div class="seller">
             <input type="int" v-model.number="id" placeholder="id">
             <input type="int" v-model.number="quantity" placeholder="quantité">
@@ -38,18 +43,17 @@
 import { mapActions, mapState } from 'pinia';
 import { useMarketStore } from '../store/marketStore';
 import { useResourceStore } from '../store/resourceStore';
+import MarketOffers from './MarketOffers.vue';
 
 export default {
+    components: {
+    MarketOffers
+},
     data() {
         return {
             id:"",
             quantity:"",
             price:""
-        }
-        offer:{
-            id: 3
-            name: 'example test'
-
         }
     },
     methods: {
@@ -64,14 +68,6 @@ export default {
             console.log(data);
             this.createOffer(data);
         },
-        buy(id, quantity){
-            let data ={
-                "id":id,
-                "quantity":quantity,
-            }
-            this.buyOffer(data);
-            this.getAllTrades();
-        }
     },
     computed: {
         ...mapState(useMarketStore,['marketList','myOffers']),
@@ -84,6 +80,23 @@ export default {
 </script>
 
 <style>
+
+.marketForm{
+    border: #748695 solid;
+    text-align: center;
+    margin: 30px 50px 100px 50px;
+    padding-bottom: 10px;
+}
+
+
+.seller input{
+    margin: 10px;
+}
+.seller{
+    display: flex;
+    flex-wrap: wrap;
+
+}
 h1{
     text-align: center;
 }
@@ -99,7 +112,10 @@ h1{
     display: flex;
     flex-direction: column;
     text-align: center;
-    background: lightgray;margin:5px
+    background: #748695;
+    margin:10px;
+    padding: 15px 0;
+    border-radius: 15px;
 }
 .seller{
     display: flex;

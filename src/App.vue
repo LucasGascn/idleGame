@@ -2,7 +2,7 @@
 <script>
   import { RouterLink, RouterView } from 'vue-router'
 import NavBar from './components/NavBar.vue';
-export default{
+export default {
     components: {
     RouterLink,
     RouterView,
@@ -31,7 +31,7 @@ export default{
 
 <style >
 body{
-  background-color: #232d37;
+  background-color: #aebecb;
   margin: 0;
 }
 </style>
