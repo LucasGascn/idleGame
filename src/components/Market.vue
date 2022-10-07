@@ -55,11 +55,6 @@ export default {
             quantity:"",
             price:""
         }
-        offer:{
-            id: 3
-            name: 'example test'
-
-        }
     },
     methods: {
         ...mapActions(useMarketStore,['createOffer',"buyOffer","deleteTrade","getAllTrades","getTradeById","getMyTrades"]),
@@ -73,14 +68,6 @@ export default {
             console.log(data);
             this.createOffer(data);
         },
-        buy(id, quantity){
-            let data ={
-                "id":id,
-                "quantity":quantity,
-            }
-            this.buyOffer(data);
-            this.getAllTrades();
-        }
     },
     computed: {
         ...mapState(useMarketStore,['marketList','myOffers']),

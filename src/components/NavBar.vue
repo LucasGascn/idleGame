@@ -8,7 +8,7 @@
         <RouterLink class="Link" to="/factory">Factory</RouterLink>
         <RouterLink class="Link" to="/market">Market</RouterLink>
         <RouterLink class="Link" to="/ressource">Ressource</RouterLink>
-        <div class="coinsDiv" > Coins : {{this.inventory.money}}</div>
+        <div class="coinsDiv" > Coins : {{inventory.money}}</div>
 
     </nav>
 </div>
@@ -18,10 +18,17 @@
 
 <script>
     import { mapActions,mapState } from 'pinia';
+import { useProfilStore } from '../store/profilStore';
     import { useResourceStore } from '../store/resourceStore'
 
     export default {
+        data(){
+            return{
+/*                 user:{'username':'3', 'password': '123456789'}
+ */            }
+        },
         methods: {
+            ...mapActions(useProfilStore, ['login']),
         ...mapActions(useResourceStore,["getResources","createResources","getInventory","getResourcesById"]),
         // updateTimer(){
         //     setInterval(() => {
@@ -30,13 +37,18 @@
         // }
     },
     computed:{
+        
         ...mapState(useResourceStore,["inventory","resourceList"]),
     },
     mounted(){
         // this.inventory.money = setInterval(()=>{
         //     this.getInventory();
         // },1000)
-    }
+/*         this.login(this.user);
+ */    },
+    updated () {
+        this.getInventory();
+    },
     }
 
 </script>

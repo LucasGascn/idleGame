@@ -1,5 +1,6 @@
 <script>
   import { mapActions, mapState } from 'pinia'
+import { signUp } from '../functions/api';
 import { useProfilStore } from "../store/profilStore";
   export default{
     components:{
@@ -9,7 +10,9 @@ import { useProfilStore } from "../store/profilStore";
     },
     data() {
       return {
-        user: {'username': '3', 'password': '123456789'}
+        user: {'username': '', 'password': ''},
+        userS: {'username': '', 'password': ''}
+
       }
     },
     methods: {
@@ -17,6 +20,11 @@ import { useProfilStore } from "../store/profilStore";
         let data = {'username': this.user.username, 'password': this.user.password}
         this.user.username = ''
         this.user.password = ''
+        this.$router.push('/factory');
+        return data
+      },
+      setDataS(){
+        let data = {'username': this.userS.username, 'password': this.userS.password}
         return data
       },
       ...mapActions(useProfilStore, ['login']),
@@ -25,7 +33,7 @@ import { useProfilStore } from "../store/profilStore";
       ...mapState(useProfilStore, ['profil']),
     },
     mounted(){
-      this.login(this.user)
+      /* his.login(this.user) */
     }
 
   }
@@ -47,6 +55,12 @@ import { useProfilStore } from "../store/profilStore";
     <h3>Connexion</h3>
     <input type="text" placeholder="Username" name="username" id="username" v-model="user.username">
     <input type="text" placeholder="Password" name="password" id="password" v-model="user.password">
+    <button type="submit">Login</button>
+  </form>
+  <form class="loginForm" v-if="profil.id == null " @submit.prevent="signUp(setDataS())" style="margin-left: 10px;">
+    <h3>Sign Up</h3>
+    <input type="text" placeholder="Username" name="username" id="username" v-model="userS.username">
+    <input type="text" placeholder="Password" name="password" id="password" v-model="userS.password">
     <button type="submit">Login</button>
   </form>
 </div>

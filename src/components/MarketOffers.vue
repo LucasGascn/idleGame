@@ -9,7 +9,7 @@
                 <div> Vends : {{offer.quantity + offer.resource.name}}</div>
                 <div>Pour : {{offer.unitPrice}} </div>
                 <!-- <div>{{offer}}</div> -->
-                <button @click="buyOffer(index)">acheter</button>
+                <button @click="buyOffer(parseInt(index, 10))">acheter</button>
             </div>
         </div>
     </div>
@@ -20,6 +20,7 @@
 
 import { mapActions, mapState } from 'pinia';
 import { useMarketStore } from '../store/marketStore';
+import { useProfilStore } from '../store/profilStore';
 import { useResourceStore } from '../store/resourceStore';
 
 export default {
@@ -27,12 +28,14 @@ export default {
         return {
             id:"",
             quantity:"",
-            price:""
+            price:"",
+
         }
     },
     methods: {
         ...mapActions(useMarketStore,['createOffer',"buyOffer","deleteTrade","getAllTrades","getTradeById","getMyTrades"]),
         ...mapActions(useResourceStore,["getResources","getResourcesById"]),
+
         onSubmit(){
             let data = {
                 "resourceId": this.id,
@@ -40,6 +43,14 @@ export default {
                 "unitPrice": this.price
             }
             this.createOffer(data);
+        },
+        buy(id, quantity){
+            let data = {
+                "id": id,
+                "quantity": quantity,
+            }
+            this.buyOffer(data);
+            this.getAllTrades();
         }
     },
     computed: {
@@ -47,6 +58,7 @@ export default {
         ...mapState(useResourceStore,['resourceList'])
     },
     mounted () {
+
         this.getAllTrades();
     },
 }
