@@ -16,7 +16,7 @@
         <!-- <div>{{sizeOf(item.factories)}}</div> -->
         <!-- <div v-for="factory in item.owner">
             <div>Factory</div>
-         {{ factory.model.resource.name}} 
+        {{ factory.model.resource.name}} 
         </div> -->
     </div>
 
